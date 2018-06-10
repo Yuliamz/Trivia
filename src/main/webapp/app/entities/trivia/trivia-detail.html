@@ -1,0 +1,37 @@
+
+<div>
+    <h2><span>Trivia</span> {{vm.trivia.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Start</span></dt>
+        <dd>
+            <span>{{vm.trivia.start | date:'medium'}}</span>
+        </dd>
+        <dt><span>Duration</span></dt>
+        <dd>
+            <span>{{vm.trivia.duration}}</span>
+        </dd>
+        <dt><span>Level</span></dt>
+        <dd>
+            <span>{{vm.trivia.level}}</span>
+        </dd>
+        <dt><span>Question</span></dt>
+        <dd>
+            <span ng-repeat="question in vm.trivia.questions">
+                <a ui-sref="question-detail({id: question.id})">{{question.question}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="trivia-detail.edit({id:vm.trivia.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
