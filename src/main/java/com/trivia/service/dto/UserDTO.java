@@ -8,10 +8,13 @@ import com.trivia.domain.User;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.trivia.domain.enumeration.Genero;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -35,10 +38,17 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    private Genero genero;
+
+    @Lob
+    private byte[] foto;
+
+    private String fotoContentType;
+
     @Size(max = 256)
     private String imageUrl;
 
-    private boolean activated = false;
+    private boolean activated = true;
 
     @Size(min = 2, max = 6)
     private String langKey;
@@ -169,6 +179,34 @@ public class UserDTO {
 
     public void setLastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+	public Genero getGenero() {
+        return genero;
+    }
+
+    public UserDTO genero(Genero genero) {
+        this.genero = genero;
+        return this;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public String getFotoContentType() {
+        return fotoContentType;
+    }
+
+    public void setFotoContentType(String fotoContentType) {
+        this.fotoContentType = fotoContentType;
     }
 
     public Set<String> getAuthorities() {

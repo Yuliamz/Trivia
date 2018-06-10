@@ -18,6 +18,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.time.Instant;
 
+import com.trivia.domain.enumeration.Genero;
+
 /**
  * A user.
  */
@@ -57,9 +59,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 100, unique = true)
     private String email;
 
+	@NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genero", nullable = false)
+    private Genero genero;
+
+    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
+
+    @Column(name = "foto_content_type")
+    private String fotoContentType;
+
     @NotNull
     @Column(nullable = false)
-    private boolean activated = false;
+    private boolean activated = true;
 
     @Size(min = 2, max = 6)
     @Column(name = "lang_key", length = 6)
@@ -187,6 +201,44 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setLangKey(String langKey) {
         this.langKey = langKey;
+    }
+
+	public Genero getGenero() {
+        return genero;
+    }
+
+    public User genero(Genero genero) {
+        this.genero = genero;
+        return this;
+    }
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public User foto(byte[] foto) {
+        this.foto = foto;
+        return this;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public String getFotoContentType() {
+        return fotoContentType;
+    }
+
+    public User fotoContentType(String fotoContentType) {
+        this.fotoContentType = fotoContentType;
+        return this;
+    }
+
+    public void setFotoContentType(String fotoContentType) {
+        this.fotoContentType = fotoContentType;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
     }
 
     public Set<Authority> getAuthorities() {

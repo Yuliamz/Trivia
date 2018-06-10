@@ -28,6 +28,15 @@
             <column name="email" type="varchar(100)">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
             </column>
+			<column name="genero" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+			<column name="foto" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="foto_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />

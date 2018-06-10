@@ -1,0 +1,26 @@
+entity Trivia {
+	start Instant required,
+    duration Integer required
+    level Integer required min(1) max(10)
+}
+entity Question {
+	question String required,
+	answer1 String required,
+	answer2 String required,
+	answer3 String required,
+    answer4 String required,
+    correctAnswer Integer required min(1) max(4),
+    time Integer
+}
+entity ClientAnswer {
+	correct Boolean required,
+	time Integer required,
+}
+
+relationship ManyToMany{
+Trivia{Question(question)} to Question{trivia}
+}
+relationship OneToMany {
+  Question{clientAnswer} to ClientAnswer{Question(question)}
+}
+paginate * with infinite-scroll
