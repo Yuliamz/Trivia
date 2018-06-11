@@ -5,19 +5,29 @@
         .module('triviaApp')
         .controller('ClientAnswerDialogController', ClientAnswerDialogController);
 
-    ClientAnswerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClientAnswer', 'Question'];
+    ClientAnswerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClientAnswer', 'Question','Principal'];
 
-    function ClientAnswerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClientAnswer, Question) {
+    function ClientAnswerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClientAnswer, Question,Principal) {
         var vm = this;
 
         vm.clientAnswer = entity;
         vm.clear = clear;
         vm.save = save;
         vm.questions = Question.query();
+		vm.account = null;
+		getAccount();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
+
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+				vm.clientAnswer.user=vm.account;
+            });
+        }
+		
 
         function clear () {
             $uibModalInstance.dismiss('cancel');

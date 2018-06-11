@@ -1,0 +1,86 @@
+
+<div ng-if="vm.start==false">
+    <h2><span>Trivia</span> {{vm.trivia.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Start</span></dt>
+        <dd>
+            <span>{{vm.trivia.start | date:'medium'}}</span>
+        </dd>
+        <dt><span>Duration</span></dt>
+        <dd>
+            <span>{{vm.trivia.duration | date:'mm:ss'}}</span>
+        </dd>
+        <dt><span>Level</span></dt>
+        <dd>
+            <span>{{vm.trivia.level}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ng-click="vm.startTrivia()" class="btn btn-primary">
+        <span class="glyphicon glyphicon-play-circle"></span>
+        <span class="hidden-sm-down"> Iniciar</span>
+    </button>
+</div>
+
+<div ng-if="vm.start==true">
+    <wizard on-finish="vm.finishedWizard()" on-cancel="vm.cancelledWizard()">
+        <wz-step wz-title="Pregunta 1">
+            <h1>Pregunta 1</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 2">
+            <h1>Pregunta 2</h1>
+            <p>You have continued here!</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 3">
+            <h1>Pregunta 3</h1>
+            <p>Even more steps!!</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 4">
+            <h1>Pregunta 4</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 5">
+            <h1>Pregunta 5</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 6">
+            <h1>Pregunta 6</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 7">
+            <h1>Pregunta 7</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 8">
+            <h1>Pregunta 8</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 9">
+            <h1>Pregunta 9</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+        <wz-step wz-title="Pregunta 10">
+            <h1>Pregunta 10</h1>
+            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+        </wz-step>
+    </wizard>
+</div>

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +112,22 @@ public class TriviaResource {
         log.debug("REST request to get Trivia : {}", id);
         Trivia trivia = triviaRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(trivia));
+    }
+
+    /**
+     * GET  /trivias/start/:id : get the "id" trivia.
+     *
+     * @param id the id of the trivia to retrieve if it can be played
+     * @return the ResponseEntity with status 200 (OK) and with body the trivia, or with status 404 (Not Found)
+     */
+    @GetMapping(value = "/trivias/start/{id}",produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+    public String canStart(@PathVariable Long id) {
+        log.debug("REST request to get can start : {}", id);
+        Trivia trivia = triviaRepository.findOneWithEagerRelationships(id);
+        Boolean a = trivia.getStart().isBefore(Instant.now());
+        System.out.println("================Start: "+a);
+        return a.toString();
     }
 
     /**

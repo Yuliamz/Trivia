@@ -13,6 +13,12 @@
                                  constraintName="fk_client_answer_question_id"
                                  referencedColumnNames="id"
                                  referencedTableName="question"/>
+								 
+		<addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="client_answer"
+                                 constraintName="fk_client_answer_jhi_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>

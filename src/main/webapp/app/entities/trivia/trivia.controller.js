@@ -5,9 +5,9 @@
         .module('triviaApp')
         .controller('TriviaController', TriviaController);
 
-    TriviaController.$inject = ['Trivia', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    TriviaController.$inject = ['Trivia', 'ParseLinks', 'AlertService', 'paginationConstants','CanStart','$ngConfirm','$state','$http'];
 
-    function TriviaController(Trivia, ParseLinks, AlertService, paginationConstants) {
+    function TriviaController(Trivia, ParseLinks, AlertService, paginationConstants,CanStart,$ngConfirm,$state,$http) {
 
         var vm = this;
 
@@ -50,6 +50,24 @@
                 AlertService.error(error.data.message);
             }
         }
+
+        vm.loadStart = function(id) {
+            CanStart.get({id:id}, onSuccess, onError);
+
+            function onSuccess(data) {
+                if (data[0]==='t') {
+                    $state.go('trivia-play', {id: id});
+                }else{
+                    $ngConfirm('Esta trivia no esta disponible aún');
+                }
+            }
+            function onError(error) {
+                console.log(error);
+                $ngConfirm('Esta trivia no esta disponible aún');
+            }
+        };
+
+
 
         function reset () {
             vm.page = 0;

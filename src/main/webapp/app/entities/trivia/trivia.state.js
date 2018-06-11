@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/trivia',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_ADMIN'],
                 pageTitle: 'Trivias'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'trivia',
             url: '/trivia/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_ADMIN'],
                 pageTitle: 'Trivia'
             },
             views: {
@@ -54,11 +54,39 @@
                 }]
             }
         })
+		.state('trivia-play', {
+            parent: 'trivia',
+            url: '/play/{id}',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'Jugar Trivia'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/trivia/trivia-play.html',
+                    controller: 'TriviaPlayController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                entity: ['$stateParams', 'Trivia', function($stateParams, Trivia) {
+                    return Trivia.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'trivia',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+        })
         .state('trivia-detail.edit', {
             parent: 'trivia-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -83,7 +111,7 @@
             parent: 'trivia',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -97,7 +125,7 @@
                             return {
                                 start: null,
                                 duration: null,
-                                level: null,
+                                level: 5,
                                 id: null
                             };
                         }
@@ -113,7 +141,7 @@
             parent: 'trivia',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -138,7 +166,7 @@
             parent: 'trivia',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

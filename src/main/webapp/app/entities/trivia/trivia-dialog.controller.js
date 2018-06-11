@@ -24,6 +24,14 @@
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
+		
+		vm.change = function(){
+			var u=0;
+			for(var i=0;i<vm.trivia.questions.length;i++){
+				u=u+vm.trivia.questions[i].time;
+			}
+			vm.trivia.duration=u;
+		}
 
         function save () {
             vm.isSaving = true;

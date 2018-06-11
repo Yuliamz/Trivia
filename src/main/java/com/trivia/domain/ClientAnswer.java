@@ -31,6 +31,10 @@ public class ClientAnswer implements Serializable {
     @ManyToOne
     private Question question;
 
+    @ManyToOne
+    private User user;
+
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -73,6 +77,14 @@ public class ClientAnswer implements Serializable {
     public ClientAnswer question(Question question) {
         this.question = question;
         return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setQuestion(Question question) {

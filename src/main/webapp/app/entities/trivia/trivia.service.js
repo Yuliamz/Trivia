@@ -2,9 +2,11 @@
     'use strict';
     angular
         .module('triviaApp')
-        .factory('Trivia', Trivia);
+        .factory('Trivia', Trivia)
+        .factory('CanStart', CanStart);
 
     Trivia.$inject = ['$resource', 'DateUtils'];
+    CanStart.$inject = ['$resource', 'DateUtils'];
 
     function Trivia ($resource, DateUtils) {
         var resourceUrl =  'api/trivias/:id';
@@ -24,4 +26,15 @@
             'update': { method:'PUT' }
         });
     }
+
+    function CanStart ($resource) {
+        var resourceUrl =  'api/trivias/start/:id';
+
+        return $resource(resourceUrl, {}, {
+            'get': {
+                method: 'GET'
+            }
+        });
+    }
+
 })();

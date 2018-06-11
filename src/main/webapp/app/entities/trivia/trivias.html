@@ -1,7 +1,7 @@
 <div>
     <h2>Trivias</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
+    <div class="container-fluid" has-authority="ROLE_ADMIN">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="trivia.new" >
@@ -18,7 +18,7 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th has-authority="ROLE_ADMIN" jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="start"><span>Start</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="duration"><span>Duration</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="level"><span>Level</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -27,29 +27,39 @@
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="trivia in vm.trivias track by trivia.id">
-                    <td><a ui-sref="trivia-detail({id:trivia.id})">{{trivia.id}}</a></td>
+                    <td has-authority="ROLE_ADMIN"><a ui-sref="trivia-detail({id:trivia.id})">{{trivia.id}}</a></td>
                     <td>{{trivia.start | date:'medium'}}</td>
-                    <td>{{trivia.duration}}</td>
+                    <td>{{trivia.duration | date:'mm:ss'}}</td>
                     <td>{{trivia.level}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="trivia-detail({id:trivia.id})"
-                                    class="btn btn-info btn-sm">
+                                    class="btn btn-info btn-sm"
+									has-authority="ROLE_ADMIN">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down"></span>
+                                <span class="hidden-sm-down">Estadísticas</span>
+                            </button>
+							<button type="submit"
+                                    ng-click="vm.loadStart(trivia.id)"
+                                    class="btn btn-info btn-sm"
+									has-authority="ROLE_USER">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down">Jugar</span>
                             </button>
                             <button type="submit"
                                     ui-sref="trivia.edit({id:trivia.id})"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-primary btn-sm"
+									has-authority="ROLE_ADMIN">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down"></span>
+                                <span class="hidden-sm-down">Editar</span>
                             </button>
                             <button type="submit"
                                     ui-sref="trivia.delete({id:trivia.id})"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm"
+									has-authority="ROLE_ADMIN">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down"></span>
+                                <span class="hidden-sm-down">Eliminar</span>
                             </button>
                         </div>
                     </td>
