@@ -5,9 +5,9 @@
         .module('triviaApp')
         .controller('TriviaStatsController', TriviaStatsController);
 
-    TriviaStatsController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'Question','TriviaStats'];
+    TriviaStatsController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'Question','TriviaStats','$state'];
 
-    function TriviaStatsController($scope, $rootScope, $stateParams, previousState, Question,TriviaStats) {
+    function TriviaStatsController($scope, $rootScope, $stateParams, previousState, Question,TriviaStats,$state) {
         var vm = this;
         vm.previousState = previousState.name;
         vm.predicate = 'score';

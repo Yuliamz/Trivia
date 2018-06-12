@@ -5,9 +5,9 @@
         .module('triviaApp')
         .controller('TriviaPlayController', TriviaPlayController);
 
-    TriviaPlayController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Trivia', 'Question', 'Principal', 'WizardHandler', 'ClientAnswer', '$timeout'];
+    TriviaPlayController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Trivia', 'Question', 'Principal', 'WizardHandler', 'ClientAnswer', '$timeout','$state'];
 
-    function TriviaPlayController($scope, $rootScope, $stateParams, previousState, entity, Trivia, Question, Principal, WizardHandler, ClientAnswer, $timeout) {
+    function TriviaPlayController($scope, $rootScope, $stateParams, previousState, entity, Trivia, Question, Principal, WizardHandler, ClientAnswer, $timeout,$state) {
         var vm = this;
         vm.start = false;
         vm.account = {};
