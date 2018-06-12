@@ -54,6 +54,31 @@
                 }]
             }
         })
+        .state('trivia-stats', {
+                parent: 'trivia',
+                url: '/stats/{id}',
+                data: {
+                    authorities: ['ROLE_ADMIN','ROLE_USER'],
+                    pageTitle: 'Trivia Statistics'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/trivia/trivia-stats.html',
+                        controller: 'TriviaStatsController',
+                        controllerAs: 'vm'
+                    }
+                },
+                resolve: {
+                    previousState: ["$state", function ($state) {
+                        var currentStateData = {
+                            name: $state.current.name || 'trivia',
+                            params: $state.params,
+                            url: $state.href($state.current.name, $state.params)
+                        };
+                        return currentStateData;
+                    }]
+                }
+            })
 		.state('trivia-play', {
             parent: 'trivia',
             url: '/play/{id}',

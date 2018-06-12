@@ -1,9 +1,13 @@
 package com.trivia.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.trivia.domain.ClientAnswer;
+import com.trivia.domain.ClientAnswer_;
 import com.trivia.domain.Trivia;
 
+import com.trivia.repository.ClientAnswerRepository;
 import com.trivia.repository.TriviaRepository;
+import com.trivia.service.dto.StatDTO;
 import com.trivia.web.rest.errors.BadRequestAlertException;
 import com.trivia.web.rest.util.HeaderUtil;
 import com.trivia.web.rest.util.PaginationUtil;
@@ -23,8 +27,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Trivia.
@@ -39,8 +45,11 @@ public class TriviaResource {
 
     private final TriviaRepository triviaRepository;
 
-    public TriviaResource(TriviaRepository triviaRepository) {
+    private final ClientAnswerRepository clientAnswerRepository;
+
+    public TriviaResource(TriviaRepository triviaRepository, ClientAnswerRepository clientAnswerRepository) {
         this.triviaRepository = triviaRepository;
+        this.clientAnswerRepository = clientAnswerRepository;
     }
 
     /**
@@ -100,6 +109,31 @@ public class TriviaResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+    /**
+     * GET  /trivias/stats/:id : get all the trivias.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of trivias in body
+     */
+    @GetMapping("/trivias/stats/{id}")
+    @Timed
+    public ResponseEntity<List<StatDTO>> geTtriviaStats(@PathVariable long id) {
+        log.debug("REST request to get a page of Trivias");
+        List<ClientAnswer> answers= clientAnswerRepository.findAll().stream().filter(
+            e -> e.getQuestion().getTrivias().stream().anyMatch(trivia -> trivia.getId()==id)
+        ).collect(Collectors.toList());
+
+        List<StatDTO> statDTOS= new ArrayList<>();
+
+        for (ClientAnswer a:answers) {
+            if (statDTOS.stream().noneMatch(statDTO -> statDTO.getUser().getId()==a.getUser().getId())){
+                statDTOS.add(new StatDTO(answers,a.getUser()));
+            }
+        }
+
+        return new ResponseEntity<>(statDTOS, HttpStatus.OK);
+    }
+
     /**
      * GET  /trivias/:id : get the "id" trivia.
      *
@@ -126,7 +160,6 @@ public class TriviaResource {
         log.debug("REST request to get can start : {}", id);
         Trivia trivia = triviaRepository.findOneWithEagerRelationships(id);
         Boolean a = trivia.getStart().isBefore(Instant.now());
-        System.out.println("================Start: "+a);
         return a.toString();
     }
 

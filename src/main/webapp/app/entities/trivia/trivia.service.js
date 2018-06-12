@@ -3,10 +3,13 @@
     angular
         .module('triviaApp')
         .factory('Trivia', Trivia)
-        .factory('CanStart', CanStart);
+        .factory('CanStart', CanStart)
+        .factory('TriviaStats', TriviaStats);
 
     Trivia.$inject = ['$resource', 'DateUtils'];
     CanStart.$inject = ['$resource', 'DateUtils'];
+    TriviaStats.$inject = ['$resource', 'DateUtils'];
+
 
     function Trivia ($resource, DateUtils) {
         var resourceUrl =  'api/trivias/:id';
@@ -34,6 +37,13 @@
             'get': {
                 method: 'GET'
             }
+        });
+    }
+    function TriviaStats ($resource) {
+        var resourceUrl =  'api/trivias/stats/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
         });
     }
 

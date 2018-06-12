@@ -16,7 +16,8 @@
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
 			'cp.ngConfirm',
-            'mgo-angular-wizard'
+            'mgo-angular-wizard',
+            'timer'
         ])
         .run(run);
 

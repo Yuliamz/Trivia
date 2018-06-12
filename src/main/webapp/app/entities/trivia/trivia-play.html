@@ -31,56 +31,129 @@
 </div>
 
 <div ng-if="vm.start==true">
-    <wizard on-finish="vm.finishedWizard()" on-cancel="vm.cancelledWizard()">
+    <wizard on-finish="vm.finishedWizard()" on-cancel="vm.cancelledWizard()" edit-mode="false">
         <wz-step wz-title="Pregunta 1">
-            <h1>Pregunta 1</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question1.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question1.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question1.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question1.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question1.answer4}}</button>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary" ng-click="vm.stopTimer()">Stop</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.startTimer()">Start</button>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 2">
-            <h1>Pregunta 2</h1>
-            <p>You have continued here!</p>
+            <h1>{{vm.question2.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question2.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question2.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question2.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question2.answer4}}</button>
+            </div>
+            <hr>
+            <button type="submit" class="btn btn-primary" ng-click="vm.stopTimer()">Stop</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.startTimer()">Start</button>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 3">
-            <h1>Pregunta 3</h1>
-            <p>Even more steps!!</p>
+            <h1>{{vm.question3.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question3.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question3.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question3.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question3.answer4}}</button>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="vm.stopTimer()">Stop</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.startTimer()">Start</button>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 4">
-            <h1>Pregunta 4</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question4.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question4.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question4.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question4.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question4.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 5">
-            <h1>Pregunta 5</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question5.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question5.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question5.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question5.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question5.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 6">
-            <h1>Pregunta 6</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question6.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question6.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question6.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question6.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question6.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 7">
-            <h1>Pregunta 7</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question7.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question7.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question7.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question7.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question7.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 8">
-            <h1>Pregunta 8</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question8.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question8.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question8.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question8.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question8.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 9">
-            <h1>Pregunta 9</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
+            <h1>{{vm.question9.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question9.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question9.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question9.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question9.answer4}}</button>
+            </div>
+            <hr>
             <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
         </wz-step>
         <wz-step wz-title="Pregunta 10">
-            <h1>Pregunta 10</h1>
-            <p>Here you can use whatever you want. You can use other directives, binding, etc.</p>
-            <input type="submit" wz-next="vm.saveAnswer()" value="Siguiente" />
+            <h1>{{vm.question10.question}}</h1>
+            <div class="btn-group-vertical text-center" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-primary" value="1" ng-click="vm.setAnswer(1)">{{vm.question10.answer1}}</button>
+                <button type="submit" class="btn btn-primary" value="2" ng-click="vm.setAnswer(2)">{{vm.question10.answer2}}</button>
+                <button type="submit" class="btn btn-primary" value="3" ng-click="vm.setAnswer(3)">{{vm.question10.answer3}}</button>
+                <button type="submit" class="btn btn-primary" value="4" ng-click="vm.setAnswer(4)">{{vm.question10.answer4}}</button>
+            </div>
+            <hr>
+            <input type="submit" wz-next="vm.saveAnswer()" value="Finalizar" />
         </wz-step>
     </wizard>
+    <hr>
+    <timer id="timr" ng-if="vm.watch" countdown="vm.time/1000" interval="1000" finish-callback="vm.finishTime(countdown)">
+        Tiempo restante : {{countdown}} Segundos
+        <div class="progress progress-striped active {{displayProgressActive}}" style="height: 30px;">
+            <div class="progress-bar" role="progressbar" style="width:{{progressBar}}%;"></div>
+        </div>
+    </timer>
 </div>

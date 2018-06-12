@@ -3,6 +3,7 @@ package com.trivia.web.rest;
 import com.trivia.TriviaApp;
 
 import com.trivia.domain.Trivia;
+import com.trivia.repository.ClientAnswerRepository;
 import com.trivia.repository.TriviaRepository;
 import com.trivia.web.rest.errors.ExceptionTranslator;
 
@@ -67,11 +68,12 @@ public class TriviaResourceIntTest {
     private MockMvc restTriviaMockMvc;
 
     private Trivia trivia;
+    private ClientAnswerRepository clientAnswerRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TriviaResource triviaResource = new TriviaResource(triviaRepository);
+        final TriviaResource triviaResource = new TriviaResource(triviaRepository, clientAnswerRepository);
         this.restTriviaMockMvc = MockMvcBuilders.standaloneSetup(triviaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

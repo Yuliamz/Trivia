@@ -1,0 +1,45 @@
+
+<div>
+    <h2><span>Trivia Stats</span> {{vm.trivia.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    Mejorar Stats
+
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                <th jh-sort-by="user"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="score"><span>Score</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="correct"><span>Correct Answers</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="incorrect"><span>Incorrect Answers</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="correctPercent"><span>Percent of Correct Answers</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="incorrectPercent"><span>Percent of Incorrect Answers</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="answerTime"><span>Time</span> <span class="glyphicon glyphicon-sort"></span></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+            <tr ng-repeat="stat in vm.stats ">
+                <td>{{stat.user.firstName}}</td>
+                <td>{{stat.score}}</td>
+                <td>{{stat.correct}}</td>
+                <td>{{stat.incorrect}}</td>
+                <td>{{stat.correctPercent}}</td>
+                <td>{{stat.incorrectPercent}}</td>
+                <td>{{stat.answerTime | date:'mm:ss.sss'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <!--button type="button" ui-sref="trivia-detail.edit({id:vm.trivia.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button-->
+</div>

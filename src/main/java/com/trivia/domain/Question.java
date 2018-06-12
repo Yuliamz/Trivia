@@ -56,7 +56,7 @@ public class Question implements Serializable {
     @JsonIgnore
     private Set<ClientAnswer> clientAnswers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "questions",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Trivia> trivias = new HashSet<>();
 
